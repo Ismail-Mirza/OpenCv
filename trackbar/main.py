@@ -8,6 +8,9 @@ cv.namedWindow('image')
 cv.createTrackbar('B','image',0,255,nothing)
 cv.createTrackbar('G','image',0,255,nothing)
 cv.createTrackbar('R','image',0,255,nothing)
+# use switch using trackbar
+button = '0: OFF\n 1: ON'
+cv.createTrackbar(button,'image',0,1,nothing)
 while True:
     cv.imshow('image',img)
     k = cv.waitKey(1) & 0xFF
@@ -16,5 +19,9 @@ while True:
     b =cv.getTrackbarPos('B','image')
     g =cv.getTrackbarPos('G','image')
     r =cv.getTrackbarPos('R','image')
-    img[:] = [b,g,r]
+    s = cv.getTrackbarPos(button,'image')
+    if s == 0:
+        img[:] = 0
+    else:
+        img[:] = [b,g,r]
 cv.destroyAllWindows()
